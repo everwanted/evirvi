@@ -1,0 +1,33 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+x=np.linspace(0,2.5,10000)
+y=0.5 * x**2 * np.cos(x**2)
+d=0
+roots=[]
+counter=0
+
+
+for i in range(len(y)-1):
+    if y[i]==0:
+       roots.append(x[i])
+    elif (y[i]>0 and y[i+1]<0) or (y[i]<0 and y[i+1]>0):
+        roots.append(x[i])
+    
+print("the roots are: {} ".format(roots))
+
+
+for i in range(len(y)):
+    if y[i]==0 or  ((y[i]>0 and y[i+1]<0) or (y[i]<0 and y[i+1]>0)):
+        counter+=1
+    if counter==3:
+       break
+    d+=np.sqrt(np.square(x[i]-x[i-1])+np.square(y[i]-y[i-1]))
+    
+    
+print("distance: {}".format(2*d))
+
+
+plt.plot(x,y,"r-")
+plt.grid(True)
+plt.show()
